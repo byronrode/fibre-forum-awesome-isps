@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Compare Internet Service Providers in South Africa"
+    />
+    <title>Awesome ISPs in South Africa</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/css/styles.css"
+      rel="stylesheet"
+    <style>
+      .filter-section {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin: 2px;
+      }
+      .badge-success {
+        background: #d1fae5;
+        color: #065f46;
+      }
+      .badge-warning {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .badge-danger {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+      <div class="container mx-auto px-4 py-6">
+        <h1 class="text-3xl font-bold text-gray-900">
+          Awesome ISPs in South Africa
+        </h1>
+        <p class="text-gray-600 mt-2">Community-driven ISP comparison tool</p>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <div class="filter-section">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Province</label
+            >
+            <select
+              id="provinceFilter"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            >
+              <option value="">All Provinces</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">FNO</label>
+            <select
+              id="fnoFilter"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            >
+              <option value="">All FNOs</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Technical Filters</label
+            >
+            <div class="mt-2 space-x-4">
+              <label class="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  id="ipv6Filter"
+                  class="rounded border-gray-300"
+                />
+                <span class="ml-2">IPv6</span>
+              </label>
+              <label class="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  id="noCgnatFilter"
+                  class="rounded border-gray-300"
+                />
+                <span class="ml-2">No CGNAT</span>
+              </label>
+              <label class="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  id="fibreOnlyFilter"
+                  class="rounded border-gray-300"
+                />
+                <span class="ml-2">Fibre Only</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow">
+        <table id="ispsTable" class="min-w-full">
+          <thead>
+            <tr>
+              <th>ISP Name</th>
+              <th>Coverage</th>
+              <th>Ratings</th>
+              <th>Technical</th>
+              <th>Business Info</th>
+              <th>Features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t mt-8">
+      <div class="container mx-auto px-4 py-6 text-center text-gray-600">
+        <p>
+          Contribute on
+          <a
+            href="https://github.com/byronrode/fibre-forum-awesome-isps"
+            class="text-blue-600 hover:underline"
+            >GitHub</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="assets/scripts/table-config.js"></script>
+  </body>
+</html>

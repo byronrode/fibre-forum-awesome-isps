@@ -1,0 +1,15 @@
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
+title: Awesome ISPs in South Africa
+description: Community-driven ISP comparison tool
+show_downloads: false
+
+# SEO
+lang: en-ZA
+author: Community Project
+social:
+  name: Awesome ISPs ZA
+  links:
+    - https://github.com/byronrode/fibre-forum-awesome-isps
