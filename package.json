@@ -1,0 +1,27 @@
+{
+  "name": "awesome-isps",
+  "version": "1.0.0",
+  "description": "Awesome ISPs in South Africa",
+  "scripts": {
+    "start": "live-server --port=8000 --no-browser",
+    "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\" \"live-server --port=8000 --open=index.html\"",
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./assets/css/style.css --watch",
+    "watch:js": "esbuild src/scripts/main.js --bundle --outfile=assets/scripts/bundle.js --watch",
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./assets/css/style.css --minify",
+    "build:js": "esbuild src/scripts/main.js --bundle --minify --outfile=assets/scripts/bundle.js",
+    "build": "npm run build:css && npm run build:js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "concurrently": "^9.0.1",
+    "esbuild": "^0.24.0",
+    "flowbite-typography": "^1.0.4",
+    "live-server": "^1.2.2",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "flowbite": "^2.5.2",
+    "simple-datatables": "^9.2.1"
+  }
+}

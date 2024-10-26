@@ -1,19 +1,57 @@
-let dataTable;
-let originalData;
+import { DataTable } from "simple-datatables";
+
+var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+var themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+
+// Change the icons inside the button based on previous settings
+if (
+  localStorage.getItem("color-theme") === "dark" ||
+  (!("color-theme" in localStorage) &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+  themeToggleLightIcon.classList.remove("hidden");
+} else {
+  themeToggleDarkIcon.classList.remove("hidden");
+}
+
+var themeToggleBtn = document.getElementById("theme-toggle");
+
+themeToggleBtn.addEventListener("click", function () {
+  // toggle icons inside button
+  themeToggleDarkIcon.classList.toggle("hidden");
+  themeToggleLightIcon.classList.toggle("hidden");
+
+  // if set via local storage previously
+  if (localStorage.getItem("color-theme")) {
+    if (localStorage.getItem("color-theme") === "light") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("color-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("color-theme", "light");
+    }
+
+    // if NOT set via local storage previously
+  } else {
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("color-theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("color-theme", "dark");
+    }
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   fetch("isps.json")
     .then((response) => response.json())
-    .then((data) => {
-      originalData = data;
-      initializeTable(data);
-      initializeFilters(data);
-    })
+    .then((data) => initializeTable(data))
     .catch((error) => console.error("Error loading ISP data:", error));
 });
 
 function initializeTable(data) {
-  dataTable = new simpleDatatables.DataTable("#ispsTable", {
+  const table = new DataTable("#ispsTable", {
     data: {
       headings: [
         "ISP Name",
@@ -28,12 +66,9 @@ function initializeTable(data) {
     searchable: true,
     sortable: true,
     perPage: 15,
-    perPageSelect: [10, 15, 20, 25, 50],
-    columns: [
-      { select: 0, sort: "asc" },
-      { select: [1, 2, 3, 4, 5], sortable: false },
-    ],
   });
+
+  initializeFilters(data, table);
 }
 
 function formatTableData(isps) {
@@ -106,49 +141,49 @@ function formatFeatures(isp) {
     `;
 }
 
-function initializeFilters(data) {
-  // Populate province filter
+function initializeFilters(data, table) {
   const provinces = [
     ...new Set(data.isps.flatMap((isp) => isp.provinces)),
   ].sort();
-  populateSelect("provinceFilter", provinces);
+  const provinceFilter = document.getElementById("provinceFilter");
+  provinces.forEach((province) => {
+    const option = document.createElement("option");
+    option.value = province;
+    option.textContent = province;
+    provinceFilter.appendChild(option);
+  });
 
-  // Populate FNO filter
   const fnos = [...new Set(data.isps.flatMap((isp) => isp.fnos))].sort();
-  populateSelect("fnoFilter", fnos);
+  const fnoFilter = document.getElementById("fnoFilter");
+  fnos.forEach((fno) => {
+    const option = document.createElement("option");
+    option.value = fno;
+    option.textContent = fno;
+    fnoFilter.appendChild(option);
+  });
 
-  // Add event listeners to all filters
-  [
+  const filters = [
     "provinceFilter",
     "fnoFilter",
     "ipv6Filter",
     "noCgnatFilter",
     "fibreOnlyFilter",
-  ].forEach((filterId) => {
-    document
-      .getElementById(filterId)
-      .addEventListener("change", () => applyFilters());
+  ];
+  filters.forEach((filterId) => {
+    document.getElementById(filterId).addEventListener("change", () => {
+      applyFilters(table, data);
+    });
   });
 }
 
-function populateSelect(elementId, options) {
-  const select = document.getElementById(elementId);
-  options.forEach((option) => {
-    const optionElement = document.createElement("option");
-    optionElement.value = option;
-    optionElement.textContent = option;
-    select.appendChild(optionElement);
-  });
-}
-
-function applyFilters() {
+function applyFilters(table, data) {
   const selectedProvince = document.getElementById("provinceFilter").value;
   const selectedFNO = document.getElementById("fnoFilter").value;
   const ipv6Only = document.getElementById("ipv6Filter").checked;
   const noCgnat = document.getElementById("noCgnatFilter").checked;
   const fibreOnly = document.getElementById("fibreOnlyFilter").checked;
 
-  const filteredData = originalData.isps.filter((isp) => {
+  const filteredData = data.isps.filter((isp) => {
     const provinceMatch =
       !selectedProvince || isp.provinces.includes(selectedProvince);
     const fnoMatch = !selectedFNO || isp.fnos.includes(selectedFNO);
@@ -159,7 +194,6 @@ function applyFilters() {
     return provinceMatch && fnoMatch && ipv6Match && cgnatMatch && fibreMatch;
   });
 
-  // Update table with filtered data
-  dataTable.destroy();
+  table.destroy();
   initializeTable({ isps: filteredData });
 }

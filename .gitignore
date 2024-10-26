@@ -3,3 +3,5 @@ node_modules/
 .env
 .vscode/
 *.log
+assets/css/style.css
+assets/scripts/bundle.js
