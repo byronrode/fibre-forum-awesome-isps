@@ -1,7 +1,7 @@
 # Awesome ISPs in South Africa 🌍
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-green)](https://[your-username].github.io/awesome-isps/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-green)](https://github.com/byronrode/fibre-forum-awesome-isps)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 A community-curated list of Internet Service Providers (ISPs) in South Africa, complete with detailed attributes and comparisons.
@@ -17,7 +17,7 @@ This repository aims to:
 
 ## 🌐 View the Data
 
-Visit our [GitHub Pages site](https://[your-username].github.io/awesome-isps/) to:
+Visit our [GitHub Pages site](https://https://github.com/byronrode/fibre-forum-awesome-isps.github.io/awesome-isps/) to:
 
 - Sort ISPs by various attributes
 - Filter by province or FNO
