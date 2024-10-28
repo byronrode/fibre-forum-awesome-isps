@@ -1,5 +1,9 @@
+@import "flowbite/dist/flowbite.css";
+@import "simple-datatables/dist/style.css";
+
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 @layer components {
   .badge {
@@ -31,7 +35,3 @@
     @apply dark:text-gray-300 dark:hover:bg-gray-700;
   }
 }
-
-@tailwind utilities;
-@import "flowbite/dist/flowbite.css";
-@import "simple-datatables/dist/style.css";
