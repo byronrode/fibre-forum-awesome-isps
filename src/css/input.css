@@ -1,8 +1,37 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
-@import "./components.css";
 @import "flowbite/dist/flowbite.css";
 @import "simple-datatables/dist/style.css";
 
-@tailwind utilities;
+@layer components {
+  .badge {
+    @apply px-2 py-1 rounded-md text-xs font-medium;
+  }
+  .badge-success {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300;
+  }
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300;
+  }
+  .badge-danger {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300;
+  }
+
+  .datatable-wrapper {
+    @apply dark:bg-gray-800;
+  }
+
+  .datatable-input {
+    @apply dark:bg-gray-700 dark:text-white dark:border-gray-600;
+  }
+
+  .datatable-selector {
+    @apply dark:bg-gray-700 dark:text-white dark:border-gray-600;
+  }
+
+  .datatable-pagination button {
+    @apply dark:text-gray-300 dark:hover:bg-gray-700;
+  }
+}
